@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-3-18 15:22:04 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pojo.Product" table="product" catalog="factory_manage">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="sum" type="java.lang.Integer">
+            <column name="sum" />
+        </property>
+        <property name="spec" type="string">
+            <column name="spec" length="100" />
+        </property>
+        <set name="plans" table="plan" inverse="true" fetch="select" lazy="true">
+            <key>
+                <column name="product_id" />
+            </key>
+            <one-to-many class="pojo.Plan" />
+        </set>
+    </class>
+</hibernate-mapping>

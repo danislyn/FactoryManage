@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-3-18 15:22:04 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pojo.Plan" table="plan" catalog="factory_manage">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="machine" class="pojo.Machine" fetch="select" lazy="false">
+            <column name="machine_id" />
+        </many-to-one>
+        <many-to-one name="product" class="pojo.Product" fetch="select" lazy="false">
+            <column name="product_id" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="fromTime" type="timestamp">
+            <column name="from_time" length="19" />
+        </property>
+        <property name="toTime" type="timestamp">
+            <column name="to_time" length="19" />
+        </property>
+        <property name="expectation" type="java.lang.Integer">
+            <column name="expectation" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+    </class>
+</hibernate-mapping>
