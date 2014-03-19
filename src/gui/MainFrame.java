@@ -60,6 +60,7 @@ public class MainFrame extends JFrame {
 					machinePane = new MachinePane();
 				}
 				updateResultPane(machinePane);
+				machinePane.updateTable();
 			}
 		});
 		machineBtn.setBounds(160, 10, 120, 35);
@@ -73,6 +74,7 @@ public class MainFrame extends JFrame {
 					planPane = new PlanPane();
 				}
 				updateResultPane(planPane);
+				planPane.updateTable();
 			}
 		});
 		planBtn.setBounds(299, 10, 120, 35);
@@ -86,6 +88,7 @@ public class MainFrame extends JFrame {
 					productPane = new ProductPane();
 				}
 				updateResultPane(productPane);
+				productPane.updateTable();
 			}
 		});
 		productBtn.setBounds(439, 10, 120, 35);

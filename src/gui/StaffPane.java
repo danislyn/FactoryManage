@@ -36,7 +36,7 @@ public class StaffPane extends JPanel {
 		
 		contentTable = new JTable();
 		scrollPane.setViewportView(contentTable);
-		contentTable.setFont(new Font("ËÎÌו", Font.PLAIN, 20));
+		contentTable.setFont(new Font("ËÎÌו", Font.PLAIN, 16));
 		contentTable.setRowHeight(24);
 		
 		JButton addBtn = new JButton("\u6DFB\u52A0\u4EBA\u5458");
