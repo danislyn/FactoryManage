@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -44,8 +45,8 @@ public class PlanPane extends JPanel {
 		JButton addBtn = new JButton("\u5236\u5B9A\u751F\u4EA7\u8BA1\u5212");
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				PlanDialog dialog = new PlanDialog(getThis(), null);
+				dialog.setVisible(true);
 			}
 		});
 		addBtn.setBounds(21, 24, 120, 35);
@@ -54,8 +55,9 @@ public class PlanPane extends JPanel {
 		JButton editBtn = new JButton("\u4FEE\u6539\u8BA1\u5212\u4FE1\u606F");
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				Plan plan = planCache.get(contentTable.getSelectedRow());
+				PlanDialog dialog = new PlanDialog(getThis(), plan);
+				dialog.setVisible(true);
 			}
 		});
 		editBtn.setBounds(21, 84, 120, 35);
@@ -64,8 +66,13 @@ public class PlanPane extends JPanel {
 		JButton deleteBtn = new JButton("\u5220\u9664\u8BA1\u5212");
 		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Plan plan = planCache.get(contentTable.getSelectedRow());
 				
-				
+				int result = JOptionPane.showConfirmDialog(null, "确定要删除 " + plan.getName() + " 吗？");
+				if(result == JOptionPane.OK_OPTION){
+					planDao.delete(plan);
+				}
+				updateTable();
 			}
 		});
 		deleteBtn.setBounds(21, 143, 120, 35);
@@ -140,10 +147,10 @@ public class PlanPane extends JPanel {
 				val = plan.getName();
 				break;
 			case 2:
-				val = sdf.format(plan.getFromTime());
+				val = plan.getFromTime() != null ? sdf.format(plan.getFromTime()) : "无";
 				break;
 			case 3:
-				val = sdf.format(plan.getToTime());
+				val = plan.getToTime() != null ? sdf.format(plan.getToTime()) : "无";
 				break;
 			case 4:
 				val = plan.getMachine() != null ? plan.getMachine().getAlias() : "无";

@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -42,8 +43,8 @@ public class ProductPane extends JPanel {
 		JButton addBtn = new JButton("\u6DFB\u52A0\u96F6\u4EF6");
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				ProductDialog dialog = new ProductDialog(getThis(), null);
+				dialog.setVisible(true);
 			}
 		});
 		addBtn.setBounds(21, 24, 120, 35);
@@ -52,8 +53,9 @@ public class ProductPane extends JPanel {
 		JButton editBtn = new JButton("\u7F16\u8F91\u4FE1\u606F");
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				Product product = productCache.get(contentTable.getSelectedRow());
+				ProductDialog dialog = new ProductDialog(getThis(), product);
+				dialog.setVisible(true);
 			}
 		});
 		editBtn.setBounds(21, 84, 120, 35);
@@ -62,8 +64,13 @@ public class ProductPane extends JPanel {
 		JButton deleteBtn = new JButton("\u5220\u9664\u96F6\u4EF6");
 		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Product product = productCache.get(contentTable.getSelectedRow());
 				
-				
+				int result = JOptionPane.showConfirmDialog(null, "È·¶¨ÒªÉ¾³ý " + product.getName() + " Âð£¿");
+				if(result == JOptionPane.OK_OPTION){
+					productDao.delete(product);
+				}
+				updateTable();
 			}
 		});
 		deleteBtn.setBounds(21, 143, 120, 35);

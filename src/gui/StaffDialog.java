@@ -99,7 +99,10 @@ public class StaffDialog extends JDialog {
 							Staff oneStaff = new Staff();
 							oneStaff.setName(nameField.getText());
 							oneStaff.setGender(radioMale.isSelected() ? 1 : 0);
-							oneStaff.setAge(Integer.parseInt(ageField.getText()));
+							try {
+								oneStaff.setAge(Integer.parseInt(ageField.getText()));
+							} catch (NumberFormatException e) {
+							}
 							
 							staffDao.save(oneStaff);
 						}
@@ -107,7 +110,10 @@ public class StaffDialog extends JDialog {
 						else{
 							currentStaff.setName(nameField.getText());
 							currentStaff.setGender(radioMale.isSelected() ? 1 : 0);
-							currentStaff.setAge(Integer.parseInt(ageField.getText()));
+							try {
+								currentStaff.setAge(Integer.parseInt(ageField.getText()));
+							} catch (NumberFormatException e) {
+							}
 							
 							staffDao.update(currentStaff);
 						}

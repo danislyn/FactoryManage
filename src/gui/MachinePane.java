@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -43,32 +44,48 @@ public class MachinePane extends JPanel {
 		JButton addBtn = new JButton("\u6DFB\u52A0\u673A\u5E8A");
 		addBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				MachineDialog dialog = new MachineDialog(getThis(), null);
+				dialog.setVisible(true);
 			}
 		});
-		addBtn.setBounds(21, 24, 120, 35);
+		addBtn.setBounds(21, 82, 120, 35);
 		add(addBtn);
 		
 		JButton editBtn = new JButton("\u4FEE\u6539\u673A\u5E8A\u4FE1\u606F");
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				Machine machine = machineCache.get(contentTable.getSelectedRow());
+				MachineDialog dialog = new MachineDialog(getThis(), machine);
+				dialog.setVisible(true);
 			}
 		});
-		editBtn.setBounds(21, 84, 120, 35);
+		editBtn.setBounds(21, 140, 120, 35);
 		add(editBtn);
 		
 		JButton deleteBtn = new JButton("\u5220\u9664\u673A\u5E8A");
 		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Machine machine = machineCache.get(contentTable.getSelectedRow());
 				
-				
+				int result = JOptionPane.showConfirmDialog(null, "È·¶¨ÒªÉ¾³ý " + machine.getAlias() + " Âð£¿");
+				if(result == JOptionPane.OK_OPTION){
+					machineDao.delete(machine);
+				}
+				updateTable();
 			}
 		});
-		deleteBtn.setBounds(21, 143, 120, 35);
+		deleteBtn.setBounds(21, 200, 120, 35);
 		add(deleteBtn);
+		
+		JButton typeBtn = new JButton("\u6DFB\u52A0\u673A\u5E8A\u7C7B\u578B");
+		typeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MachineTypeDialog dialog = new MachineTypeDialog();
+				dialog.setVisible(true);
+			}
+		});
+		typeBtn.setBounds(21, 25, 120, 35);
+		add(typeBtn);
 
 	}
 	
@@ -153,5 +170,4 @@ public class MachinePane extends JPanel {
 	    }
 		
 	}
-	
 }

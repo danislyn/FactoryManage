@@ -1,44 +1,50 @@
 package gui;
 
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+
+import org.jvnet.substance.skin.SubstanceBusinessBlueSteelLookAndFeel;
 
 public class LoginFrame extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel jContentPane = null;
+	private JPanel contentPane;
 
 	/**
-	 * This is the default constructor
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//设置外观  
+//		            UIManager.setLookAndFeel(new SubstanceBusinessBlueSteelLookAndFeel());
+		            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		            
+					LoginFrame frame = new LoginFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
 	 */
 	public LoginFrame() {
-		super();
-		initialize();
-	}
-
-	/**
-	 * This method initializes this
-	 * 
-	 * @return void
-	 */
-	private void initialize() {
-		this.setSize(300, 200);
-		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
-	}
-
-	/**
-	 * This method initializes jContentPane
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getJContentPane() {
-		if (jContentPane == null) {
-			jContentPane = new JPanel();
-			jContentPane.setLayout(new BorderLayout());
-		}
-		return jContentPane;
+		this.setTitle("车间调度管理系统");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
+		
+		contentPane = new LoginPane(this);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 	}
 
 }
