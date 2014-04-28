@@ -41,7 +41,6 @@ public class PlanDialog extends JDialog {
 	private JTextField mmField2;
 	private JTextField ddField2;
 	private JTextField expectionField;
-	private JComboBox machineBox;
 	private JComboBox productBox;
 	
 	private PlanPane parent;
@@ -50,7 +49,7 @@ public class PlanDialog extends JDialog {
 	private MachineDao machineDao = new MachineDaoHibernate();
 	private ProductDao productDao = new ProductDaoHibernate();
 	
-	private List<Machine> machineList;
+//	private List<Machine> machineList;
 	private List<Product> productList;
 
 	/**
@@ -58,7 +57,7 @@ public class PlanDialog extends JDialog {
 	 */
 	public PlanDialog(PlanPane current, Plan plan) {
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 420);
+		setBounds(100, 100, 450, 370);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -167,39 +166,27 @@ public class PlanDialog extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			JLabel label = new JLabel("\u8D1F\u8D23\u673A\u5E8A");
+			JLabel label = new JLabel("\u751F\u4EA7\u96F6\u4EF6");
 			label.setFont(new Font("宋体", Font.PLAIN, 14));
-			label.setBounds(48, 180, 80, 30);
-			contentPanel.add(label);
-		}
-		{
-			machineBox = new JComboBox();
-			machineBox.setFont(new Font("宋体", Font.PLAIN, 14));
-			machineBox.setBounds(158, 180, 120, 30);
-			contentPanel.add(machineBox);
-		}
-		{
-			JLabel label = new JLabel("\u751F\u6210\u96F6\u4EF6");
-			label.setFont(new Font("宋体", Font.PLAIN, 14));
-			label.setBounds(48, 231, 80, 30);
+			label.setBounds(48, 181, 80, 30);
 			contentPanel.add(label);
 		}
 		{
 			productBox = new JComboBox();
 			productBox.setFont(new Font("宋体", Font.PLAIN, 14));
-			productBox.setBounds(158, 231, 120, 30);
+			productBox.setBounds(158, 181, 120, 30);
 			contentPanel.add(productBox);
 		}
 		{
 			JLabel label = new JLabel("\u8BA1\u5212\u4EA7\u91CF");
 			label.setFont(new Font("宋体", Font.PLAIN, 14));
-			label.setBounds(48, 284, 80, 30);
+			label.setBounds(48, 234, 80, 30);
 			contentPanel.add(label);
 		}
 		{
 			expectionField = new JTextField();
 			expectionField.setFont(new Font("宋体", Font.PLAIN, 14));
-			expectionField.setBounds(158, 284, 120, 30);
+			expectionField.setBounds(158, 234, 120, 30);
 			contentPanel.add(expectionField);
 			expectionField.setColumns(10);
 		}
@@ -233,10 +220,10 @@ public class PlanDialog extends JDialog {
 							} catch (NumberFormatException e) {
 							}
 							
-							int index = machineBox.getSelectedIndex();
-							if(index > 0){
-								onePlan.setMachine(machineList.get(index - 1));
-							}
+//							int index = machineBox.getSelectedIndex();
+//							if(index > 0){
+//								onePlan.setMachine(machineList.get(index - 1));
+//							}
 							
 							int index2 = productBox.getSelectedIndex();
 							if(index2 > 0){
@@ -273,13 +260,13 @@ public class PlanDialog extends JDialog {
 								currentPlan.setToTime(null);
 							}
 							
-							int index = machineBox.getSelectedIndex();
-							if(index > 0){
-								currentPlan.setMachine(machineList.get(index - 1));
-							}
-							else{
-								currentPlan.setMachine(null);
-							}
+//							int index = machineBox.getSelectedIndex();
+//							if(index > 0){
+//								currentPlan.setMachine(machineList.get(index - 1));
+//							}
+//							else{
+//								currentPlan.setMachine(null);
+//							}
 							
 							int index2 = productBox.getSelectedIndex();
 							if(index2 > 0){
@@ -347,10 +334,10 @@ public class PlanDialog extends JDialog {
 				ddField2.setText(String.valueOf(c.get(Calendar.DATE)));
 			}
 			
-			if(currentPlan.getMachine() != null){
-				int index = findMachineIndex(currentPlan.getMachine());
-				machineBox.setSelectedIndex(index + 1);
-			}
+//			if(currentPlan.getMachine() != null){
+//				int index = findMachineIndex(currentPlan.getMachine());
+//				machineBox.setSelectedIndex(index + 1);
+//			}
 			
 			if(currentPlan.getProduct() != null){
 				int index = findProductIndex(currentPlan.getProduct());
@@ -365,33 +352,31 @@ public class PlanDialog extends JDialog {
 	}
 	
 	private void initCombox(){
-		machineList = machineDao.findAll();
+//		machineList = machineDao.findAll();
 		productList = productDao.findAll();
 		
-		Vector<String> machineVector = new Vector<String>();
-		machineVector.add("无");
-		for(Machine machine : machineList){
-			machineVector.add(machine.getAlias());
-		}
+//		Vector<String> machineVector = new Vector<String>();
+//		machineVector.add("无");
+//		for(Machine machine : machineList){
+//			machineVector.add(machine.getAlias());
+//		}
 		
 		Vector<String> productVector = new Vector<String>();
 		productVector.add("无");
 		for(Product product : productList){
 			productVector.add(product.getName());
 		}
-		
-		machineBox.setModel(new DefaultComboBoxModel(machineVector));
 		productBox.setModel(new DefaultComboBoxModel(productVector));
 	}
 	
-	private int findMachineIndex(Machine machine){
-		for(int i=0; i<machineList.size(); i++){
-			if(machineList.get(i).getId().equals(machine.getId())){
-				return i;
-			}
-		}
-		return -1;
-	}
+//	private int findMachineIndex(Machine machine){
+//		for(int i=0; i<machineList.size(); i++){
+//			if(machineList.get(i).getId().equals(machine.getId())){
+//				return i;
+//			}
+//		}
+//		return -1;
+//	}
 	
 	private int findProductIndex(Product product){
 		for(int i=0; i<productList.size(); i++){

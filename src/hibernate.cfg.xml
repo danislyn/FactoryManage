@@ -14,6 +14,7 @@
         <mapping resource="pojo/Machine.hbm.xml" />
         <mapping resource="pojo/MachineType.hbm.xml" />
         <mapping resource="pojo/Plan.hbm.xml" />
+        <mapping resource="pojo/Procedure.hbm.xml" />
         <mapping resource="pojo/Product.hbm.xml" />
         <mapping resource="pojo/Staff.hbm.xml" />
         <mapping resource="pojo/User.hbm.xml" />

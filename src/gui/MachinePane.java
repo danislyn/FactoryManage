@@ -113,7 +113,7 @@ public class MachinePane extends JPanel {
 	
 	//======================================================
 	class MachineModel extends AbstractTableModel{
-		String[] columns = {"编号", "机床类型", "别名", "当前操作人员"};
+		String[] columns = {"编号", "机床类型", "用途", "当前操作人员"};
 		List<Machine> data = new ArrayList<Machine>();
 		
 		public MachineModel(List<Machine> data){

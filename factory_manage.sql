@@ -32,7 +32,7 @@ CREATE TABLE `machine` (
   KEY `machine_ibfk_2_idx` (`current_staff`),
   CONSTRAINT `machine_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `machine_type` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `machine_ibfk_2` FOREIGN KEY (`current_staff`) REFERENCES `staff` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `machine` (
 
 LOCK TABLES `machine` WRITE;
 /*!40000 ALTER TABLE `machine` DISABLE KEYS */;
-INSERT INTO `machine` VALUES (1,'1号小机',1,1),(2,'数控1号',2,2),(3,'数控2号',2,NULL);
+INSERT INTO `machine` VALUES (1,'裁截',1,1),(2,'打磨抛光',2,2),(3,'打孔',4,NULL);
 /*!40000 ALTER TABLE `machine` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `plan` (
   KEY `plan_ibfk_2_idx` (`product_id`),
   CONSTRAINT `plan_ibfk_1` FOREIGN KEY (`machine_id`) REFERENCES `machine` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `plan_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,8 +100,40 @@ CREATE TABLE `plan` (
 
 LOCK TABLES `plan` WRITE;
 /*!40000 ALTER TABLE `plan` DISABLE KEYS */;
-INSERT INTO `plan` VALUES (1,'第1周计划','2014-03-18 00:00:00','2014-03-25 00:00:00',1,1,200,0),(2,'第2周计划','2014-03-26 19:33:16','2014-04-02 19:33:16',3,2,1000,NULL),(3,'第3周计划','2014-04-03 19:34:00','2014-04-10 19:34:00',NULL,2,500,NULL);
+INSERT INTO `plan` VALUES (1,'第1周计划','2014-03-18 00:00:00','2014-03-25 00:00:00',1,1,200,0),(2,'第2周计划','2014-03-26 09:51:01','2014-04-02 09:51:01',3,1,1000,NULL),(3,'第3周计划','2014-04-03 19:34:00','2014-04-10 19:34:00',NULL,2,500,NULL);
 /*!40000 ALTER TABLE `plan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `procedure`
+--
+
+DROP TABLE IF EXISTS `procedure`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `procedure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `step_no` int(11) DEFAULT NULL,
+  `step_name` varchar(45) DEFAULT NULL,
+  `machine_id` int(11) NOT NULL,
+  `unit_time` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `procedure_ibfk_1_idx` (`product_id`),
+  KEY `procedure_ibfk_2_idx` (`machine_id`),
+  CONSTRAINT `procedure_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `procedure_ibfk_2` FOREIGN KEY (`machine_id`) REFERENCES `machine` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `procedure`
+--
+
+LOCK TABLES `procedure` WRITE;
+/*!40000 ALTER TABLE `procedure` DISABLE KEYS */;
+INSERT INTO `procedure` VALUES (1,1,1,'采样切割',1,0.5),(2,1,2,'钻刻螺纹',2,3),(3,1,3,'边缘抛光',2,1.5),(4,1,4,'钻孔',3,1),(5,2,1,'采样切割',1,0.5),(6,2,2,'圆润化',2,2),(7,2,3,'连接处开孔',3,1.5);
+/*!40000 ALTER TABLE `procedure` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -117,7 +149,7 @@ CREATE TABLE `product` (
   `sum` int(11) DEFAULT '0',
   `spec` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +175,7 @@ CREATE TABLE `staff` (
   `gender` int(11) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-19 20:11:28
+-- Dump completed on 2014-04-24 10:51:37

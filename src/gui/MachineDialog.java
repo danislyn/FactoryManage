@@ -69,7 +69,7 @@ public class MachineDialog extends JDialog {
 		typeBox.setBounds(154, 28, 120, 30);
 		contentPanel.add(typeBox);
 		
-		JLabel label = new JLabel("\u673A\u5E8A\u522B\u540D");
+		JLabel label = new JLabel("\u673A\u5E8A\u7528\u9014");
 		label.setFont(new Font("ËÎÌו", Font.PLAIN, 14));
 		label.setBounds(44, 96, 90, 30);
 		contentPanel.add(label);

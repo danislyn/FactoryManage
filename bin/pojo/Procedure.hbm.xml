@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-4-22 10:37:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pojo.Procedure" table="procedure" catalog="factory_manage">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="machine" class="pojo.Machine" fetch="select" lazy="false">
+            <column name="machine_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="product" class="pojo.Product" fetch="select" lazy="false">
+            <column name="product_id" not-null="true" />
+        </many-to-one>
+        <property name="stepNo" type="java.lang.Integer">
+            <column name="step_no" />
+        </property>
+        <property name="stepName" type="string">
+            <column name="step_name" length="45" />
+        </property>
+        <property name="unitTime" type="java.lang.Float">
+            <column name="unit_time" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

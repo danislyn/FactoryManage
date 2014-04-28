@@ -64,6 +64,7 @@ public class PlanPane extends JPanel {
 		add(editBtn);
 		
 		JButton deleteBtn = new JButton("\u5220\u9664\u8BA1\u5212");
+		deleteBtn.setFont(new Font("宋体", Font.PLAIN, 12));
 		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Plan plan = planCache.get(contentTable.getSelectedRow());
@@ -75,8 +76,21 @@ public class PlanPane extends JPanel {
 				updateTable();
 			}
 		});
-		deleteBtn.setBounds(21, 143, 120, 35);
+		deleteBtn.setBounds(21, 197, 120, 35);
 		add(deleteBtn);
+		
+		JButton procedureBtn = new JButton("\u67E5\u770B\u751F\u4EA7\u5DE5\u5E8F");
+		procedureBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Plan plan = planCache.get(contentTable.getSelectedRow());
+				ProcedureDialog dialog = new ProcedureDialog(plan);
+				dialog.setVisible(true);
+				dialog.updateTable();
+			}
+		});
+		procedureBtn.setFont(new Font("宋体", Font.PLAIN, 12));
+		procedureBtn.setBounds(21, 141, 120, 35);
+		add(procedureBtn);
 
 	}
 	
@@ -104,7 +118,7 @@ public class PlanPane extends JPanel {
 	
 	//======================================================
 	class PlanModel extends AbstractTableModel{
-		String[] columns = {"编号", "计划名称", "开始日期", "结束日期", "负责机床", "生成零件", "计划产量"};
+		String[] columns = {"编号", "计划名称", "开始日期", "结束日期", "生产零件", "计划产量"};
 		List<Plan> data = new ArrayList<Plan>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -153,12 +167,9 @@ public class PlanPane extends JPanel {
 				val = plan.getToTime() != null ? sdf.format(plan.getToTime()) : "无";
 				break;
 			case 4:
-				val = plan.getMachine() != null ? plan.getMachine().getAlias() : "无";
-				break;
-			case 5:
 				val = plan.getProduct() != null ? plan.getProduct().getName() : "无";
 				break;
-			case 6:
+			case 5:
 				val = String.valueOf(plan.getExpectation());
 				break;
 			}
@@ -171,5 +182,4 @@ public class PlanPane extends JPanel {
 	    }
 		
 	}
-
 }
